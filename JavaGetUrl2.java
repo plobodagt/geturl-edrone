@@ -1,10 +1,14 @@
 import java.io.*;
 import java.net.*;
 
+@SpringBootApplication
+@EnableCircuitBreaker
+
 public class JavaGetUrl2 {
 
    public static void main (String[] args) {
-
+	
+      SpringApplication.run(HystrixExampleApplication.class, args);
       URL u;
       InputStream is = null;
       DataInputStream dis;
@@ -14,6 +18,8 @@ public class JavaGetUrl2 {
       try {
 
          u = new URL("https://edrone.me/");
+	 
+	 
 	 
 	 is = u.openStream();         // throws an IOException
 
@@ -29,12 +35,6 @@ public class JavaGetUrl2 {
          }
          System.out.println(ink);
 
-      } catch (MalformedURLException mue) {
-
-         System.out.println("Ouch - a MalformedURLException happened.");
-         mue.printStackTrace();
-         System.exit(1);
-
       } catch (IOException ioe) {
 
          System.out.println("Oops- an IOException happened.");
@@ -48,10 +48,6 @@ public class JavaGetUrl2 {
          } catch (IOException ioe) {
          }
 
-      } // end of 'finally' clause
-	
-	
-	
-   }  // end of main
-	
-} // end of class definition
+      } // finally
+   }  // main
+} //class
